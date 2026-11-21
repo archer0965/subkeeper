@@ -13,8 +13,8 @@ export function AuthGate() {
         {SUBKEEPER.name}
       </h1>
       <p className="mt-3 text-sm leading-relaxed text-slate-400">
-        訂閱管家需登入 NovaOS 帳號：清單綁定你的身分並雲端保存，換裝置或重新登入後仍可讀取；與
-        NovaStore、Nova AI Doc 等產品共用同一組登入。未登入無法讀寫資料。
+        智慧訂閱管理 × 雲端助手：集中管理所有訂閱項目，提供續訂提醒與該月訂閱費用彙整，讓財務狀況一目了然。永久免費，登入
+        NovaOS 帳號即可雲端保存。
       </p>
       <div className="mt-8 flex flex-wrap gap-3">
         <Link
