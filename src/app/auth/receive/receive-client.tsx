@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { applyHandoffSession } from "@/lib/auth-receive";
 import { createClient } from "@/lib/supabase/client";
 import { sanitizeNextPath } from "@/lib/safe-next";
 import { HUB_URL } from "@/lib/subkeeper";
@@ -17,11 +18,9 @@ export function AuthReceiveClient() {
     let cancelled = false;
 
     (async () => {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
+      const ok = await applyHandoffSession(supabase);
       if (cancelled) return;
-      if (session) {
+      if (ok) {
         await fetch("/api/session", { method: "POST" }).catch(() => null);
         router.replace(next);
         router.refresh();
