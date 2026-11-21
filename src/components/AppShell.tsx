@@ -851,17 +851,51 @@ export function AppShell() {
                 若你刪除 NovaOS 帳號，雲端訂閱列會一併移除（資料庫對使用者採串聯刪除）。建議先使用「Export JSON／CSV」備份。
               </p>
               <p>
-                帳號相關設定請至 NovaOS 主站：
+                帳號、服務條款、隱私與退款說明請至 NovaOS 主站；客服統一走官方 LINE。
               </p>
-              <a
-                href={SUBKEEPER.accountSettingsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-teal-300 hover:text-teal-200"
-              >
-                <ExternalLink className="h-3.5 w-3.5" />
-                paycheck.com.de／dashboard
-              </a>
+              <div className="flex flex-col gap-2">
+                <a
+                  href={`${SUBKEEPER.hubUrl}/dashboard/pass`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-teal-300 hover:text-teal-200"
+                >
+                  <ExternalLink className="h-3.5 w-3.5" />
+                  統一會員中心
+                </a>
+                <a
+                  href={`${SUBKEEPER.hubUrl}/terms`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-teal-300/90 hover:text-teal-200"
+                >
+                  服務條款
+                </a>
+                <a
+                  href={`${SUBKEEPER.hubUrl}/privacy`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-teal-300/90 hover:text-teal-200"
+                >
+                  隱私政策
+                </a>
+                <a
+                  href={`${SUBKEEPER.hubUrl}/refund`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-teal-300/90 hover:text-teal-200"
+                >
+                  退款說明
+                </a>
+                <a
+                  href="https://line.me/R/ti/p/@469uykad"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-teal-300/90 hover:text-teal-200"
+                >
+                  LINE 客服 @469uykad
+                </a>
+              </div>
             </div>
             <div className="mt-5 flex flex-wrap gap-2">
               <button
