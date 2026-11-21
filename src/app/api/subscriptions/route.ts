@@ -2,6 +2,11 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
 
+/**
+ * Member isolation: every query filters by auth user.id (user_id).
+ * RLS on personal_subscriptions also enforces user_id = auth.uid().
+ */
+
 const cycleSchema = z.enum(["monthly", "yearly", "weekly", "custom"]);
 
 const createSchema = z.object({

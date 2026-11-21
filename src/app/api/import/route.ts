@@ -20,6 +20,7 @@ const bodySchema = z.object({
   items: z.array(itemSchema).min(1).max(200),
 });
 
+/** Member isolation: imported rows always stamped with auth user.id. */
 export async function POST(request: Request) {
   const supabase = createClient();
   const {
