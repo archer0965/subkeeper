@@ -1,4 +1,5 @@
-import { AuthForm } from "@/components/AuthForm";
+import { redirect } from "next/navigation";
+import { hubAuthRedirect } from "@/lib/hub-auth";
 import { sanitizeNextPath } from "@/lib/safe-next";
 
 export const metadata = { title: "註冊｜訂閱管家" };
@@ -8,7 +9,5 @@ export default function SignupPage({
 }: {
   searchParams: { next?: string };
 }) {
-  return (
-    <AuthForm mode="signup" nextPath={sanitizeNextPath(searchParams.next)} />
-  );
+  redirect(hubAuthRedirect("signup", sanitizeNextPath(searchParams.next || "/app")));
 }
