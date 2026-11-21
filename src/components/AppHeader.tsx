@@ -166,17 +166,27 @@ export function AppHeader() {
                     <p className="text-sm font-medium text-white">{account.name}</p>
                     <p className="truncate text-xs text-slate-500">{account.email}</p>
                   </div>
-                  <a
-                    href={SUBKEEPER.hubUrl}
-                    className="block rounded-xl px-3 py-2 text-sm text-slate-200 hover:bg-white/5"
+                  <Link
+                    href="/app"
+                    className="block rounded-xl px-3 py-2 text-sm font-medium text-teal-300 hover:bg-white/5"
+                    onClick={() => setMenuOpen(false)}
                   >
-                    返回 NovaOS 主站
+                    前往功能工作台
+                  </Link>
+                  <a
+                    href={`${SUBKEEPER.hubUrl}/admin/subkeeper`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block rounded-xl px-3 py-2 text-sm text-indigo-300 hover:bg-white/5"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    進入管理後台
                   </a>
                   <a
                     href={`${SUBKEEPER.hubUrl}/dashboard`}
                     className="block rounded-xl px-3 py-2 text-sm text-slate-200 hover:bg-white/5"
                   >
-                    產品矩陣／總控台
+                    NovaOS 產品總控台
                   </a>
                   <button
                     type="button"
