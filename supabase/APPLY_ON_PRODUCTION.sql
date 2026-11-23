@@ -70,7 +70,7 @@ ALTER TABLE public.personal_subscriptions
   ADD COLUMN IF NOT EXISTS legacy_client_id text;
 
 COMMENT ON COLUMN public.personal_subscriptions.legacy_client_id IS
-  '舊版 SubKeeper localStorage 項目 id；用於一鍵同步去重';
+  '舊版訂閱管家本機 localStorage 項目 id；用於一鍵同步去重';
 
 -- NULL legacy ids do not collide (PostgreSQL UNIQUE treats NULL as distinct).
 CREATE UNIQUE INDEX IF NOT EXISTS personal_subscriptions_user_legacy_uidx

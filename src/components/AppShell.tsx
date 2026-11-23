@@ -110,6 +110,7 @@ export function AppShell() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [hint, setHint] = useState<string | null>(null);
   const [privacyOpen, setPrivacyOpen] = useState(false);
+  const [deletingData, setDeletingData] = useState(false);
   const [displayCurrency, setDisplayCurrency] = useState<DisplayCurrency>("TWD");
 
   const load = useCallback(async () => {
@@ -303,6 +304,33 @@ export function AppShell() {
       return;
     }
     await load();
+  }
+
+  async function deleteAllCloudData() {
+    if (items.length === 0) {
+      toast.message("目前沒有可清除的雲端訂閱");
+      return;
+    }
+    const ok = confirm(
+      `確定清除本帳號在訂閱管家的全部雲端訂閱（共 ${items.length} 筆）？此動作無法復原。建議先 Export JSON／CSV。\n\n（不會刪除 NovaOS 帳號本身）`,
+    );
+    if (!ok) return;
+    const again = confirm("再確認一次：真的要刪除全部雲端訂閱資料？");
+    if (!again) return;
+    setDeletingData(true);
+    try {
+      const res = await fetch("/api/account/data", { method: "DELETE" });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(json.error || "清除失敗");
+      toast.success(`已清除 ${json.deleted ?? items.length} 筆雲端訂閱`);
+      setItems([]);
+      resetForm();
+      setPrivacyOpen(false);
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "清除失敗");
+    } finally {
+      setDeletingData(false);
+    }
   }
 
   const showConverted = displayCurrency !== "TWD";
@@ -847,8 +875,12 @@ export function AppShell() {
                 訂閱管家的雲端訂閱列與你的 NovaOS 帳號綁定，並依使用者隔離。換裝置或重新登入後，登入同一帳號即可讀取。
               </p>
               <p>
-                <strong className="font-medium text-slate-200">刪除帳號：</strong>
-                若你刪除 NovaOS 帳號，雲端訂閱列會一併移除（資料庫對使用者採串聯刪除）。建議先使用「Export JSON／CSV」備份。
+                <strong className="font-medium text-slate-200">清除本產品資料：</strong>
+                可刪除你在訂閱管家的全部雲端訂閱列（不會登出、也不刪除 NovaOS 帳號）。建議先 Export。
+              </p>
+              <p>
+                <strong className="font-medium text-slate-200">刪除 NovaOS 帳號：</strong>
+                請至主站會員中心辦理。帳號刪除後，本產品雲端訂閱列會因資料庫串聯刪除一併移除。
               </p>
               <p>
                 帳號、服務條款、隱私與退款說明請至 NovaOS 主站；客服統一走官方 LINE。
@@ -861,7 +893,7 @@ export function AppShell() {
                   className="inline-flex items-center gap-1.5 text-teal-300 hover:text-teal-200"
                 >
                   <ExternalLink className="h-3.5 w-3.5" />
-                  統一會員中心
+                  統一會員中心（帳號設定／刪除帳號）
                 </a>
                 <a
                   href={`${SUBKEEPER.hubUrl}/terms`}
@@ -901,7 +933,7 @@ export function AppShell() {
               <button
                 type="button"
                 onClick={exportJson}
-                disabled={items.length === 0}
+                disabled={items.length === 0 || deletingData}
                 className="inline-flex h-9 items-center gap-1.5 rounded-xl bg-teal-400/20 px-3 text-sm text-teal-200 disabled:opacity-40"
               >
                 <Download className="h-3.5 w-3.5" />
@@ -909,7 +941,21 @@ export function AppShell() {
               </button>
               <button
                 type="button"
+                onClick={() => void deleteAllCloudData()}
+                disabled={items.length === 0 || deletingData}
+                className="inline-flex h-9 items-center gap-1.5 rounded-xl border border-rose-400/30 bg-rose-400/10 px-3 text-sm text-rose-200 disabled:opacity-40"
+              >
+                {deletingData ? (
+                  <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                ) : (
+                  <Trash2 className="h-3.5 w-3.5" />
+                )}
+                清除雲端訂閱資料
+              </button>
+              <button
+                type="button"
                 onClick={() => setPrivacyOpen(false)}
+                disabled={deletingData}
                 className="inline-flex h-9 items-center rounded-xl border border-white/10 px-3 text-sm text-slate-300"
               >
                 關閉

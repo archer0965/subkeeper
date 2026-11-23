@@ -6,13 +6,14 @@ export const SITE_URL =
   "https://temporary-speedy-reef-cy4xhhu.vercel.app";
 
 export const SUBKEEPER = {
+  /** User-visible product name — always「訂閱管家」(never English brand in UI). */
   name: "訂閱管家",
-  nameEn: "Subscription Keeper",
   hubUrl: HUB_URL,
   siteUrl: SITE_URL,
   loginHref: "/login?next=%2Fapp",
   signupHref: "/signup?next=%2Fapp",
   accountSettingsUrl: `${HUB_URL}/dashboard`,
+  /** Internal localStorage key for pre-NovaOS offline cache (not shown in UI). */
   legacyStorageKey: "subkeeper-subscriptions-v1",
   matrixProducts: [
     { name: "NovaOS 主站", href: HUB_URL },

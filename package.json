@@ -7,6 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test:stats": "node scripts/verify-stats.mjs",
+    "test:auth": "node scripts/verify-auth-receive.mjs",
+    "test:isolation": "node scripts/verify-isolation.mjs",
+    "test": "npm run test:stats && npm run test:auth && npm run test:isolation",
     "deploy:fixed": "node scripts/deploy-fixed.mjs"
   },
   "dependencies": {
