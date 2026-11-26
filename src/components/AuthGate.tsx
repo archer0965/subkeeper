@@ -13,7 +13,7 @@ export function AuthGate() {
         {SUBKEEPER.name}
       </h1>
       <p className="mt-3 text-sm leading-relaxed text-slate-400">
-        訂閱管家需登入 NovaOS 帳號：清單綁定你的身分，與 NovaStore、Nova AI Doc
+        訂閱管家需登入 NovaOS 帳號：清單綁定你的身分，與 NovaStore
         等產品共用同一組登入。未登入無法讀寫資料。
       </p>
       <div className="mt-8 flex flex-wrap gap-3">
