@@ -81,7 +81,7 @@ export function AuthForm({
             {mode === "login" ? "登入訂閱管家" : "建立 NovaOS 帳號"}
           </h1>
           <p className="mt-1 text-sm text-slate-400">
-            與 NovaStore、Nova AI Doc 等產品共用同一組帳號
+            與 NovaStore 等產品共用同一組帳號
           </p>
         </div>
 

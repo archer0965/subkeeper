@@ -18,8 +18,8 @@ export const SUBKEEPER = {
   matrixProducts: [
     { name: "NovaOS 主站", href: HUB_URL },
     { name: "NovaStore", href: "https://novastore-omega.vercel.app" },
-    { name: "Nova AI Doc", href: "https://docmate-ai-one.vercel.app" },
     { name: "拓脈預約", href: "https://taiwanbiz.vercel.app" },
+    { name: "Nova商譽寶", href: "https://novashield-mauve.vercel.app" },
     { name: "拓維空間", href: "https://novadimension.vercel.app" },
   ],
 } as const;
